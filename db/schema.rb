@@ -10,12 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_01_040302) do
+ActiveRecord::Schema.define(version: 2021_08_02_063729) do
+
+  create_table "characters", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "age"
+    t.integer "weight", null: false
+    t.text "history"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_characters_on_name", unique: true
+  end
 
   create_table "genders", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "marvels", force: :cascade do |t|
+    t.integer "movie_id", null: false
+    t.integer "character_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_id"], name: "index_marvels_on_character_id"
+    t.index ["movie_id"], name: "index_marvels_on_movie_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -28,5 +47,7 @@ ActiveRecord::Schema.define(version: 2021_08_01_040302) do
     t.index ["gender_id"], name: "index_movies_on_gender_id"
   end
 
+  add_foreign_key "marvels", "characters"
+  add_foreign_key "marvels", "movies"
   add_foreign_key "movies", "genders"
 end
