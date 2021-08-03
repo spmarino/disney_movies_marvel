@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: genders
@@ -7,19 +9,18 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-require "test_helper"
+require 'test_helper'
 
 class GenderTest < ActiveSupport::TestCase
-  test "should have a name value" do
-    gender = Gender.new()
+  test 'should have a name value' do
+    gender = Gender.new
     assert_not gender.save
   end
 
   # The fields are correct you must pass the test
 
-test'should save valid name' do
-  gender = Gender.new(name:"Drama")
-  assert gender.save
-end
-
+  test 'should save valid name' do
+    gender = Gender.new(name: 'Drama')
+    assert gender.save
+  end
 end

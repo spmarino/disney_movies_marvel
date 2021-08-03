@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: genders
@@ -8,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 class Gender < ApplicationRecord
-    has_many :movies
+  has_many :movies
 
-    validates :name, presence: true, uniqueness:true
+  validates :name, presence: true, uniqueness: true
 end
