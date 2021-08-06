@@ -11,6 +11,8 @@
 #
 class Gender < ApplicationRecord
   has_many :movies
+  has_one_attached :image
 
   validates :name, presence: true, uniqueness: true
+  validates :image, presence:true
 end
