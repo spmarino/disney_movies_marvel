@@ -7,12 +7,12 @@ class GendersController < ApplicationController
         def index
           @genders = Gender.all
       
-          render json: @genders
+          render json: @genders, each_serializer: GenderSerializer::ListSerializer
         end
       
         # GET /genders/1
         def show
-          render json: @gender
+          render json: @gender, serializer: GenderSerializer::DetailSerializer
         end
       
         # POST /genders
@@ -20,7 +20,8 @@ class GendersController < ApplicationController
           @gender = Gender.new(gender_params)
       
           if @gender.save
-            render json: @gender, status: :created, location: @gender
+            render json: @gender, status: :created, location: @gender,
+            serializer: GenderSerializer::DetailSerializer
           else
             render json: @gender.errors, status: :unprocessable_entity
           end
@@ -29,7 +30,7 @@ class GendersController < ApplicationController
         # PATCH/PUT /genders/1
         def update
           if @gender.update(gender_params)
-            render json: @gender
+            render json: @gender, serializer: GenderSerializer::DetailSerializer
           else
             render json: @gender.errors, status: :unprocessable_entity
           end

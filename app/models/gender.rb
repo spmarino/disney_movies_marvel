@@ -15,4 +15,6 @@ class Gender < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :image, presence:true
+
+  delegate :url, to: :image, prefix: true
 end

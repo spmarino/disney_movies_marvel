@@ -7,12 +7,12 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
 
-    render json: @movies, each_serializer: MovieListSerializer
+    render json: @movies, each_serializer: MovieSerializer::ListSerializer
   end
 
   # GET /movies/1
   def show
-    render json: @movie, serializer: MovieDetailSerializer
+    render json: @movie, serializer: MovieSerializer::DetailSerializer
   end
 
   # POST /movies
@@ -20,7 +20,8 @@ class MoviesController < ApplicationController
     @movie = Movie.new(movie_params)
 
     if @movie.save
-      render json: @movie, status: :created, location: @movie
+      render json: @movie, status: :created, location: @movie, 
+      serializer: MovieSerializer::DetailSerializer
     else
       render json: @movie.errors, status: :unprocessable_entity
     end
@@ -29,7 +30,7 @@ class MoviesController < ApplicationController
   # PATCH/PUT /movies/1
   def update
     if @movie.update(movie_params)
-      render json: @movie
+      render json: @movie, serializer: MovieSerializer::DetailSerializer
     else
       render json: @movie.errors, status: :unprocessable_entity
     end

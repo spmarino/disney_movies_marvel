@@ -7,12 +7,12 @@ class CharactersController < ApplicationController
   def index
     @characters = Character.all
 
-    render json: @characters, each_serializer: CharacterListSerializer
+    render json: @characters, each_serializer: CharacterSerializer::ListSerializer
   end
 
   # GET /characters/1
   def show
-    render json: @character, serializer: CharacterDetailSerializer
+    render json: @character, serializer: CharacterSerializer::DetailSerializer
   end
 
   # POST /characters
@@ -20,7 +20,8 @@ class CharactersController < ApplicationController
     @character = Character.new(character_params)
 
     if @character.save
-      render json: @character, status: :created, location: @character
+      render json: @character, status: :created, location: @character,
+      serializer: CharacterSerializer::DetailSerializer
     else
       render json: @character.errors, status: :unprocessable_entity
     end
@@ -29,7 +30,7 @@ class CharactersController < ApplicationController
   # PATCH/PUT /characters/1
   def update
     if @character.update(character_params)
-      render json: @character
+      render json: @character, serializer: CharacterSerializer::DetailSerializer
     else
       render json: @character.errors, status: :unprocessable_entity
     end
