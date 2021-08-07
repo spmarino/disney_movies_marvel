@@ -23,6 +23,9 @@ gem 'annotate'
 # Authetication
 gem 'devise_token_auth'
 
+#Serializer
+gem 'active_model_serializers'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

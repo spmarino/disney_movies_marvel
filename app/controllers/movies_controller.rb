@@ -7,12 +7,12 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
 
-    render json: @movies
+    render json: @movies, each_serializer: MovieListSerializer
   end
 
   # GET /movies/1
   def show
-    render json: @movie
+    render json: @movie, serializer: MovieDetailSerializer
   end
 
   # POST /movies
