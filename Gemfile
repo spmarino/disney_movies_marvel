@@ -26,7 +26,8 @@ gem 'devise_token_auth'
 gem 'procore-sift'
 #Serializer
 gem 'active_model_serializers'
-
+#Environment
+gem 'dotenv-rails', groups: %i[development test]
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

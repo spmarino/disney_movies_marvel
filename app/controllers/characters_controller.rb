@@ -7,11 +7,11 @@ class CharactersController < ApplicationController
   before_action :set_character, only: %i[show update destroy]
 
   filter_on :name, type: :scope, internal_name: :by_name
-  #filter_on :age, type: :integer
+  filter_on :age, type: :int
   filter_on :movies, type: :scope, internal_name: :by_movies
 
   sort_on :name, type: :string
-  #sort_on :age, type: :integer
+  sort_on :age, type: :int
 
   
 
