@@ -1,11 +1,24 @@
 # frozen_string_literal: true
 
 class CharactersController < ApplicationController
+  #Filter
+  include Sift
+#------------------------------
   before_action :set_character, only: %i[show update destroy]
+
+  filter_on :name, type: :scope, internal_name: :by_name
+  #filter_on :age, type: :integer
+  filter_on :movies, type: :scope, internal_name: :by_movies
+
+  sort_on :name, type: :string
+  #sort_on :age, type: :integer
+
+  
+
 
   # GET /characters
   def index
-    @characters = Character.all
+    @characters = filtrate(Character.all)
 
     render json: @characters, each_serializer: CharacterSerializer::ListSerializer
   end

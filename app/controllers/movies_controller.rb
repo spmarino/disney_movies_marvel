@@ -1,11 +1,23 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
+ #Filter
+ include Sift
+ #------------------------------
+
   before_action :set_movie, only: %i[show update destroy]
+
+  filter_on :title, type: :scope, internal_name: :by_title 
+  filter_on :release_date, type: :date
+  filter_on :gender, type: :scope, internal_name: :by_gender 
+
+  sort_on :release_date, type: :date
+  sort_on :title, type: :string
+  
 
   # GET /movies
   def index
-    @movies = Movie.all
+    @movies = filtrate(Movie.all)
 
     render json: @movies, each_serializer: MovieSerializer::ListSerializer
   end

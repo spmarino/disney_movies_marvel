@@ -1,4 +1,4 @@
 class GenderSerializer::ListSerializer < ActiveModel::Serializer
-  attributes :name
+  attributes :name, :image_url
 
 end

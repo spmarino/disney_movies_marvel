@@ -22,7 +22,8 @@ gem 'puma', '~> 5.0'
 gem 'annotate'
 # Authetication
 gem 'devise_token_auth'
-
+#Filters
+gem 'procore-sift'
 #Serializer
 gem 'active_model_serializers'
 
