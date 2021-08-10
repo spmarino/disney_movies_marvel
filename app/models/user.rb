@@ -21,4 +21,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  after_create :send_signup_email
+  
+  private
+  
+  def send_signup_email
+    WelcomeMessageMailer.with(user: self).signup_email.deliver
+  end
+
 end
